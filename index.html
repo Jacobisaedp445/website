@@ -97,7 +97,7 @@
         <a href="#madeby" onclick="openTab(event, 'madeby')">Made By</a>
     </nav>
     <div id="home" class="tab-content active">
-        <audio id="background-audio" loop>
+        <audio id="background-audio" loop autoplay muted preload="auto">
             <source src="website_background_audio.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
@@ -135,6 +135,7 @@
 
         function toggleAudio() {
             if (audio.paused) {
+                audio.muted = false; // Unmute the audio
                 audio.play();
                 audioControl.textContent = 'Pause';
             } else {
@@ -142,6 +143,14 @@
                 audioControl.textContent = 'Play';
             }
         }
+
+        // Play the audio when the user interacts with the page
+        document.body.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.muted = false; // Unmute the audio
+                audio.play();
+            }
+        }, { once: true }); // Ensure this only runs once
 
         function openTab(event, tabName) {
             const tabs = document.getElementsByClassName('tab-content');
