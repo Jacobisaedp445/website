@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabbed Navigation with Background Audio</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: url('background_image.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+        nav a {
+            margin: 0 15px;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-bottom: 2px solid transparent;
+        }
+        nav a:hover, nav a.active {
+            border-bottom: 2px solid white;
+        }
+        .tab-content {
+            display: none;
+            height: calc(100% - 60px); /* Adjust for the height of the nav */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 60px; /* Adjust for the height of the nav */
+            overflow-y: auto; /* Enable scrolling if content overflows */
+            width: 100%;
+            flex-direction: column;
+        }
+        .tab-content.active {
+            display: flex;
+        }
+        .content {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .photo-gallery img {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+        .made-by {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .made-by a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        .made-by a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#home" class="active" onclick="openTab(event, 'home')">Home</a>
+        <a href="#fanpage" onclick="openTab(event, 'fanpage')">Fanpage</a>
+        <a href="#madeby" onclick="openTab(event, 'madeby')">Made By</a>
+    </nav>
+    <div id="home" class="tab-content active">
+        <audio id="background-audio" loop>
+            <source src="website_background_audio.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="content">
+            <h1>Jacob Grouios Lore</h1>
+            <p>Enjoy The Website!!</p>
+            <button id="audio-control" onclick="toggleAudio()">Pause</button>
+        </div>
+    </div>
+    <div id="fanpage" class="tab-content">
+        <div class="content">
+            <h1>Fanpage</h1>
+            <p>Welcome to the fanpage!</p>
+            <div class="photo-gallery">
+                <img src="photo1.jpg" alt="Photo 1">
+                <img src="photo2.jpg" alt="Photo 2">
+                <img src="photo3.jpg" alt="Photo 3">
+                <img src="photo4.jpg" alt="Photo 4">
+                <!-- Add more photos as needed -->
+            </div>
+        </div>
+    </div>
+    <div id="madeby" class="tab-content">
+        <div class="content">
+            <h1>Made By</h1>
+            <p>Check out my Instagram page:</p>
+            <div class="made-by">
+                <a href="https://www.instagram.com/jacob_grouios_fanpage1/" target="_blank">Jacob Grouios</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const audio = document.getElementById('background-audio');
+        const audioControl = document.getElementById('audio-control');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                audioControl.textContent = 'Pause';
+            } else {
+                audio.pause();
+                audioControl.textContent = 'Play';
+            }
+        }
+
+        function openTab(event, tabName) {
+            const tabs = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            const links = document.querySelectorAll('nav a');
+            for (let i = 0; i < links.length; i++) {
+                links[i].classList.remove('active');
+            }
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
