@@ -97,14 +97,14 @@
         <a href="#madeby" onclick="openTab(event, 'madeby')">Made By</a>
     </nav>
     <div id="home" class="tab-content active">
-        <audio id="background-audio" loop autoplay muted preload="auto">
+        <audio id="background-audio" loop preload="auto">
             <source src="website_background_audio.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
         <div class="content">
             <h1>Jacob Grouios Lore</h1>
             <p>Enjoy The Website!!</p>
-            <button id="audio-control" onclick="toggleAudio()">Pause</button>
+            <button id="audio-control" onclick="toggleAudio()">Play</button>
         </div>
     </div>
     <div id="fanpage" class="tab-content">
@@ -135,7 +135,6 @@
 
         function toggleAudio() {
             if (audio.paused) {
-                audio.muted = false; // Unmute the audio
                 audio.play();
                 audioControl.textContent = 'Pause';
             } else {
@@ -144,13 +143,18 @@
             }
         }
 
-        // Play the audio when the user interacts with the page
-        document.body.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.muted = false; // Unmute the audio
-                audio.play();
-            }
-        }, { once: true }); // Ensure this only runs once
+        // Ensure the audio can be played after the user interacts with the page
+        document.addEventListener('DOMContentLoaded', function() {
+            audioControl.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    audioControl.textContent = 'Pause';
+                } else {
+                    audio.pause();
+                    audioControl.textContent = 'Play';
+                }
+            });
+        });
 
         function openTab(event, tabName) {
             const tabs = document.getElementsByClassName('tab-content');
