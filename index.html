@@ -94,6 +94,7 @@
     <nav>
         <a href="#home" class="active" onclick="openTab(event, 'home')">Home</a>
         <a href="#fanpage" onclick="openTab(event, 'fanpage')">Fanpage</a>
+        <a href="#jacobGotDropped" onclick="openTab(event, 'jacobGotDropped')">Jacob Got Dropped</a>
         <a href="#madeby" onclick="openTab(event, 'madeby')">Made By</a>
     </nav>
     <div id="home" class="tab-content active">
@@ -120,6 +121,22 @@
             </div>
         </div>
     </div>
+    <!-- New Tab for Videos -->
+    <div id="jacobGotDropped" class="tab-content">
+        <div class="content">
+            <h1>Jacob Got Dropped</h1>
+            <div>
+                <video width="320" height="240" controls>
+                    <source src="video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video width="320" height="240" controls>
+                    <source src="video2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
     <div id="madeby" class="tab-content">
         <div class="content">
             <h1>Made By</h1>
@@ -136,10 +153,10 @@
         function toggleAudio() {
             if (audio.paused) {
                 audio.play();
-                audioControl.textContent = 'Pause';
+                audioControl.textContent = 'Play';
             } else {
                 audio.pause();
-                audioControl.textContent = 'Play';
+                audioControl.textContent = 'Pause';
             }
         }
 
