@@ -98,14 +98,14 @@
         <a href="#madeby" onclick="openTab(event, 'madeby')">Made By</a>
     </nav>
     <div id="home" class="tab-content active">
-        <audio id="background-audio" loop>
+        <!-- Automatically play audio in the background -->
+        <audio id="background-audio" autoplay loop>
             <source src="website_background_audio.wav" type="audio/wav">
             Your browser does not support the audio element.
         </audio>
         <div class="content">
             <h1>Jacob Grouios Lore</h1>
             <p>Enjoy The Website!!</p>
-            <button id="audio-control" onclick="toggleAudio()">Pause</button>
         </div>
     </div>
     <div id="fanpage" class="tab-content">
@@ -147,19 +147,6 @@
         </div>
     </div>
     <script>
-        const audio = document.getElementById('background-audio');
-        const audioControl = document.getElementById('audio-control');
-
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                audioControl.textContent = 'Play';
-            } else {
-                audio.pause();
-                audioControl.textContent = 'Pause';
-            }
-        }
-
         function openTab(event, tabName) {
             const tabs = document.getElementsByClassName('tab-content');
             for (let i = 0; i < tabs.length; i++) {
