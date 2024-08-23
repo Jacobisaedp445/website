@@ -54,17 +54,6 @@
             padding: 20px;
             background: rgba(0, 0, 0, 0.5);
         }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #444;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #555;
-        }
         .photo-gallery {
             display: flex;
             flex-wrap: wrap;
@@ -98,14 +87,16 @@
         <a href="#madeby" onclick="openTab(event, 'madeby')">Made By</a>
     </nav>
     <div id="home" class="tab-content active">
-        <!-- Automatically play audio in the background -->
-        <audio id="background-audio" autoplay loop>
-            <source src="website_background_audio.wav" type="audio/wav">
+        <!-- Background audio element -->
+        <audio id="background-audio" loop>
+            <source src="website_background_audio.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
         <div class="content">
             <h1>Jacob Grouios Lore</h1>
             <p>Enjoy The Website!!</p>
+            <!-- A button to trigger audio playback on mobile devices -->
+            <button id="play-button" onclick="playAudio()">Play Background Audio</button>
         </div>
     </div>
     <div id="fanpage" class="tab-content">
@@ -147,6 +138,27 @@
         </div>
     </div>
     <script>
+        const audio = document.getElementById('background-audio');
+
+        // Function to play audio, used for user interaction on mobile devices
+        function playAudio() {
+            audio.play().then(() => {
+                console.log('Audio playing');
+                document.getElementById('play-button').style.display = 'none'; // Hide button once audio starts playing
+            }).catch(error => {
+                console.log('Playback prevented: ' + error.message);
+            });
+        }
+
+        // Event listener to start audio playback once the page loads, if possible
+        window.addEventListener('load', () => {
+            if (!audio.paused) {
+                audio.play().catch((error) => {
+                    console.log('Playback prevented on load: ' + error.message);
+                });
+            }
+        });
+
         function openTab(event, tabName) {
             const tabs = document.getElementsByClassName('tab-content');
             for (let i = 0; i < tabs.length; i++) {
